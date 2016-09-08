@@ -1,4 +1,4 @@
-#1/usr/sh
+#!/usr/sh
 
 openssl genrsa -out my-private-key.pem 2048
 openssl req -sha256 -new -key my-private-key.pem -out csr.pem -config openssl.cnf
