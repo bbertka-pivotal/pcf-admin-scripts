@@ -47,13 +47,15 @@ def getUsers(cmd="v2/users", acl=[]):
 	next = items['next_url']
 	entities = [ i for i in items['resources'] ]
 	for item in entities:
+		username = None
+		orgs = []
 		try:
-			orgs = getUserOrganizations(cmd=item['entity']['organizations_url'])
-			if orgs:
-				acl.append( (item['entity']['username'], orgs) )
-		except Exception as e:
-			print "getUsers: exception: %s" % e
+			username = item['entity']['username']
+		except:
 			continue
+		orgs = getUserOrganizations(cmd=item['entity']['organizations_url'])
+		acl.append( (username, orgs) )
+
 	if next: getUsers(cmd=next, acl=acl)
 	return acl
 
