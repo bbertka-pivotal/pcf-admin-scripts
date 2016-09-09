@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import sys, subprocess
 
-DEFAULT_USER_PASSWORD="worksh0p"
-DEFAULT_ADMIN_PASSWORD="c1oudc0w"
+DEFAULT_USER_PASSWORD="karma1976"
+DEFAULT_ADMIN_PASSWORD="karma1976"
 
 def setSpaceRole(email=None, org=None, space=None, role=None):
         if not space and not email and not org and not role:
@@ -34,7 +34,7 @@ def createOrg(org=None):
         if not org:
                 return False
         else:
-                cmd = "cf create-org %s -q workshop-large" % org
+                cmd = "cf create-org %s -q default" % org
                 execute(cmd)
         return True
 
@@ -73,7 +73,7 @@ if __name__=="__main__":
                         org_roles= ["OrgManager", "BillingManager", "OrgAuditor"]
                         for role in org_roles:
                                 setOrgRole(email=email, org=org, role=role)
-                        spaces = ['development', 'production']
+                        spaces = ['development', 'production', 'test']
                         space_roles= ["SpaceDeveloper", "SpaceManager", "SpaceAuditor"]
 			for space in spaces:
 	                        for role in space_roles:
@@ -91,6 +91,11 @@ if __name__=="__main__":
 				print "bad string, reverting to full address"
         		createUser(email=email, password=DEFAULT_USER_PASSWORD)
         		createSpace(org=org, space=space)
-			roles= ["SpaceDeveloper", "SpaceManager", "SpaceAuditor"]
-			for role in roles:
-
+                        spaces = ['development', 'production', 'test']
+                        space_roles= ["SpaceDeveloper"]
+			for s in spaces:
+	                        for role in space_roles:
+        	                        setSpaceRole(email=email, org=org, space=s, role=role)
+                        space_roles= ["SpaceDeveloper", "SpaceManager", "SpaceAuditor"]
+                        for role in space_roles:
+                        	setSpaceRole(email=email, org=org, space=space, role=role)
