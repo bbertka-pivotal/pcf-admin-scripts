@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import subprocess
 
 # This Script enables all CF feature flags
 # https://docs.cloudfoundry.org/adminguide/listing-feature-flags.html
@@ -27,7 +28,7 @@ def execute(cmd=None):
 if __name__=="__main__":
 	""" Cycles through FEATURE_FLAGS and enables all """
 	for feature in FEATURE_FLAGS:
-		cmd = 'cf enable %s' % feature
+		cmd = 'cf enable-feature-flag %s' % feature
 		out, err = execute(cmd=cmd)
 		if out: print out
 		if err: print err
