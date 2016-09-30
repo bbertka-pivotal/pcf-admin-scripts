@@ -5,6 +5,10 @@
 # note, do not run this as Sudo
 # be sure you install python dependencies as user
 
+sudo apt-get install python-pip
+sudo apt-get install python-dev
+
+pip install markupsafe --user
 
 git clone https://github.com/cf-platform-eng/tile-generator.git
 cd tile-generator
@@ -20,14 +24,7 @@ echo "    password: password" >> metadata
 # if this fails, make sure to install everything as local user
 pip install -r requirements.txt --user
 
-pip install markupsafe --user
-
 echo "export PATH=`pwd`/bin:$PATH" >> ~/.profile
 
-source ~/.profile
-
-# test the utilities
-which tile
-which pcf
-
-echo "Done.  Please update ./metadata with your ops man creds"
+echo "Please update ./metadata with your ops man creds"
+echo "Source ~/.profile before running tools"
