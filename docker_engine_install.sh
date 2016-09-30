@@ -10,4 +10,9 @@ sudo apt-get update
 sudo apt-get purge lxc-docker
 apt-cache policy docker-engine
 sudo apt-get install docker-engine
-sudo service docker start
+
+# only here for convenience, you should uncomment for security
+sudo groupadd docker
+sudo gpasswd -a ${USER} docker
+
+sudo service docker restart
