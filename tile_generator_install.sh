@@ -18,9 +18,10 @@ echo "    username: admin" >> metadata
 echo "    password: password" >> metadata
 
 # if this fails, make sure to install everything as local user
-pip install -r requirements.txt
+pip install -r requirements.txt --user
 
 echo "export PATH=`pwd`/bin:$PATH" >> ~/.profile
+
 source ~/.profile
 
 # test the utilities
