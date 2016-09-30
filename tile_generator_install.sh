@@ -20,6 +20,8 @@ echo "    password: password" >> metadata
 # if this fails, make sure to install everything as local user
 pip install -r requirements.txt --user
 
+pip install markupsafe --user
+
 echo "export PATH=`pwd`/bin:$PATH" >> ~/.profile
 
 source ~/.profile
