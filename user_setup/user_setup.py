@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import sys, subprocess
 
-DEFAULT_USER_PASSWORD="karma1976"
-DEFAULT_ADMIN_PASSWORD="karma1976"
+DEFAULT_USER_PASSWORD="workshop"
+DEFAULT_ADMIN_PASSWORD="pivotal123!"
 
 def setSpaceRole(email=None, org=None, space=None, role=None):
         if not space and not email and not org and not role:
@@ -64,6 +64,7 @@ if __name__=="__main__":
 	createOrg(org)
 	createSpace(org, "development")	
         createSpace(org, "production")
+	createSpace(org, "test")
 	with open("orgmanagers.txt") as f:
                 for line in f:
                         email = line.strip()
@@ -79,7 +80,7 @@ if __name__=="__main__":
 	                        for role in space_roles:
         	                        setSpaceRole(email=email, org=org, space=space, role=role)
 
-	with open("develoeprs.txt") as f:
+	with open("developers.txt") as f:
 		for line in f:
 			email = line.strip()
 			if not email:
