@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import sys, subprocess
 
-DEFAULT_USER_PASSWORD="karma1976"
-DEFAULT_ADMIN_PASSWORD="karma1976"
+DEFAULT_USER_PASSWORD="changeme"
+DEFAULT_ADMIN_PASSWORD="changeme"
 
 def setSpaceRole(email=None, org=None, space=None, role=None):
         if not space and not email and not org and not role:
@@ -64,12 +64,16 @@ if __name__=="__main__":
 	createOrg(org)
 	createSpace(org, "development")	
         createSpace(org, "production")
+        createSpace(org, "test")
 	with open("admins.txt") as f:
                 for line in f:
                         email = line.strip()
 			if not email:
 				continue
+
+			# comment the following line in case of SSO users
                         createUser(email=email, password=DEFAULT_ADMIN_PASSWORD)
+
                         org_roles= ["OrgManager", "BillingManager", "OrgAuditor"]
                         for role in org_roles:
                                 setOrgRole(email=email, org=org, role=role)
@@ -89,7 +93,10 @@ if __name__=="__main__":
 				space = email.split("@")[0]
 			except:
 				print "bad string, reverting to full address"
+
+                        # comment the following line in case of SSO users
         		createUser(email=email, password=DEFAULT_USER_PASSWORD)
+
         		createSpace(org=org, space=space)
                         spaces = ['development', 'production', 'test']
                         space_roles= ["SpaceDeveloper"]
