@@ -65,7 +65,7 @@ if __name__=="__main__":
 	createSpace(org, "development")	
         createSpace(org, "production")
         createSpace(org, "test")
-	with open("admins.txt") as f:
+	with open("orgmanagers.txt") as f:
                 for line in f:
                         email = line.strip()
 			if not email:
@@ -83,7 +83,7 @@ if __name__=="__main__":
 	                        for role in space_roles:
         	                        setSpaceRole(email=email, org=org, space=space, role=role)
 
-	with open("users.txt") as f:
+	with open("developers.txt") as f:
 		for line in f:
 			email = line.strip()
 			if not email:
